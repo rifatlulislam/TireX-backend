@@ -62,12 +62,14 @@ async function run() {
 
     // get api for loading user products
     app.get("/orders/:email", async (req, res) => {
-      const user = req.params.email;
-      const query = { userEmail: user };
-      console.log(query);
-      const result = await orderCollection.find(query).toArray();
+      // const query = { userEmail: req.params.email };
+      console.log("hitted api");
+      console.log(req.params.email);
+      const result = await orderCollection
+        .find({ email: req.params.email })
+        .toArray();
       console.log(result);
-      res.json(result);
+      res.send(result);
     });
 
     // delete api for user to delete a product
